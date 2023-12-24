@@ -6,18 +6,17 @@ import discord
 
 intents = discord.Intents.default()
 intents.message_content = True
+Disclient = discord.Client(intents=intents)
 
-client = discord.Client(intents=intents)
-
-@client.event
+@Disclient.event
 async def on_ready():
-    print(f'We have logged in as {client.user}')
+    print(f'We have logged in as {Disclient.user}')
 
-@client.event
+@Disclient.event
 async def on_message(message):
-    if message.author == client.user:
+    if message.author == Disclient.user:
         return
 
     if message.content.startswith('$hello'):
         await message.channel.send('Hello!')
-client.run(os.getenv('TOKEN'))
+Disclient.run(os.getenv('TOKEN'))
