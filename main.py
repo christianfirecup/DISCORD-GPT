@@ -19,4 +19,8 @@ async def on_message(message):
 
     if message.content.startswith('$hello'):
         await message.channel.send('Hello!')
+    if message.content.startswith('$ask'):
+        await message.channel.send("Processing Request")
+
+
 Disclient.run(os.getenv('TOKEN'))
