@@ -11,7 +11,7 @@ Welcome to BOTGPT, an upcoming Discord bot designed to provide assistance throug
 *Note: BOTGPT is not yet available for public use. Installation instructions will be provided upon release.*
 
 ## Commands
-*Note: The command list will be available once BOTGPT is fully developed. Expect basic commands like `!help`, `!ask`, and more.*
+*Note: The command list will be available once BOTGPT is fully developed. Expect basic commands like `$help`, `$ask`, and more.*
 
 ## Usage
 *Usage instructions will be detailed here once BOTGPT is ready for deployment.*
@@ -25,6 +25,5 @@ We are open to contributions! If you have ideas or wish to contribute to the dev
 ## License
 BOTGPT is planned to be released under the [MIT License](LICENSE).
 
-## Acknowledgements
-A special shoutout to early supporters and contributors who are eagerly awaiting the launch of BOTGPT. Your enthusiasm and feedback are invaluable to us.
+
 
