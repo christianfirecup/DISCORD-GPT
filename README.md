@@ -5,8 +5,7 @@ Welcome to BOTGPT, an upcoming Discord bot designed to provide assistance throug
 
 ## Planned Features
 - **Information Retrieval**: (Under Development) BOTGPT will be able to fetch answers to your questions.
-- **Task Management**: (Under Development) Assistance with reminders and managing to-do lists.
-- **Fun Interactions**: (Under Development) Engaging and enjoyable interactions, quizzes, and games.
+
 
 ## Installation
 *Note: BOTGPT is not yet available for public use. Installation instructions will be provided upon release.*
