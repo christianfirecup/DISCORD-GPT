@@ -1,8 +1,19 @@
 from openai import OpenAI
 from dotenv import load_dotenv
 import os
+
 load_dotenv()
 client = OpenAI(api_key=os.getenv('OPENAI'))
+
+
+def CreateAssistant(names, instructions1, tools1, model1):
+    return client.beta.assistants.create(
+        name=names,
+        instructions=instructions1,
+        tools=tools1,
+        model=model1
+
+    )
 
 
 def CreateThread():
@@ -27,7 +38,6 @@ def CreateRun(threadID, AssistantID):
 
 
 def result(threadID, runId, ):
-
     received = False
     while not received:
 
@@ -48,12 +58,8 @@ def result(threadID, runId, ):
                 return f"GPTBOT: {content}"
 
 
-
-
-
 if __name__ == "__main__":
     newthread = CreateThread()
     NewMessage("What is your objective", newthread.id)
     newrun = CreateRun(newthread.id, "asst_Mv3MzfjZUw4pIUT8jvgWwbMP")
     print(result(newthread.id, newrun.id))
-
