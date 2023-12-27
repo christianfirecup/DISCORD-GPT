@@ -7,7 +7,7 @@ import OpenaiFunctions as AIAPI
 load_dotenv()
 
 import discord
-
+Assistant_Model = os.getenv('Assistant')
 user_threads = {}
 intents = discord.Intents.default()
 intents.message_content = True
@@ -37,7 +37,7 @@ async def on_message(message):
         try:
             thread_id = user_threads[user_id]
             AIAPI.NewMessage(message.content[5:], thread_id)  # Skip the "$ask " part
-            newrun = AIAPI.CreateRun(thread_id, "asst_4vVvLRtPznGhushUvMcPSqiG")
+            newrun = AIAPI.CreateRun(thread_id, Assistant_Model)
             response = AIAPI.result(thread_id, newrun.id)
 
             # Split the response into 2000-character chunks
@@ -45,7 +45,7 @@ async def on_message(message):
 
             # Send each chunk in a separate message
             for chunk in chunks:
-                await message.channel.send("@"+ str(message.author) +" "+chunk)
+                await message.channel.send(chunk)
                 await asyncio.sleep(1)  # Optional: slight delay between messages
 
         except Exception as e:

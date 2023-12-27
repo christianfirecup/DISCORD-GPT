@@ -45,7 +45,7 @@ def result(threadID, runId, ):
                 role = message.role
                 content = message.content[0].text.value
                 received = True
-                return f"{role.capitalize()}: {content}"
+                return f"GPTBOT: {content}"
 
 
 
