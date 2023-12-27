@@ -1,6 +1,11 @@
 import asyncio
 import OpenaiFunctions as AIAPI
+import os
 
+
+async def BotCreateAssistant(names, instructions1, tools1, model1, message):
+    user_id = message.author.id
+    os.mkdir("/"+user_id)
 
 async def AIBotSender(message, user_threads, Assistant_Model):
     user_id = message.author.id
