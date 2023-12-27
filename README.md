@@ -1,7 +1,7 @@
-# BOTGPT - Your Discord Assistant Bot
+# BOTGPT - Your Discord Assistant API Config Bot
 
 ## Introduction
-Welcome to BOTGPT, an upcoming Discord bot designed to provide assistance through a simple and intuitive interface. BOTGPT is currently under development and aims to integrate a powerful assistant API, offering users a wide range of capabilities right within Discord. Stay tuned for updates on its release and capabilities!
+Welcome to BOTGPT, an upcoming Discord bot designed to provide access the OpenAI Assistants API through a simple and intuitive interface. BOTGPT is currently under development and aims to integrate a powerful assistant API, offering users a wide range of capabilities right within Discord. Stay tuned for updates on its release and capabilities!
 
 ## Planned Features
 - **Information Retrieval**: (Under Development) BOTGPT will be able to fetch answers to your questions.
