@@ -1,40 +1,39 @@
 import asyncio
-import OpenaiFunctions as AIAPI
+import OpenAIFunctions as AIAPI
 import os
 
 
-def MessageContent(message, Check):
-    return message.content.startswith(Check)
+def On_Message_Captured(User_Message, Check):
+    return User_Message.content.startswith(Check)
 
-async def sendmessge(message, response):
-    return message.channel.send(response)
+async def Bot_Check_Message(User_Message, response):
+    return User_Message.channel.send(response)
 
-async def BotCreateAssistant(names, instructions1, tools1, model1, message):
-    await message.channel.send('Creating Dir')
-    user_id = message.author.id
+async def Bot_Create_Assistant(name, instructions, tools, model, User_Message):
+    await User_Message.channel.send('Creating Dir')
+    user_id = User_Message.author.id
     os.mkdir(str(user_id))
 
-
-async def AIBotSender(message, user_threads, Assistant_Model):
-    user_id = message.author.id
+async def Bot_Send_Message(User_Message, user_threads, Assistant_Model):
+    user_id = User_Message.author.id
     print(user_id)
 
     if user_id not in user_threads:
-        newthread = AIAPI.CreateThread()
+        newthread = AIAPI.Create_Thread()
         user_threads[user_id] = newthread.id
     try:
         thread_id = user_threads[user_id]
-        AIAPI.NewMessage(message.content[5:], thread_id)  # Skip the "$ask " part
-        newrun = AIAPI.CreateRun(thread_id, Assistant_Model)
-        response = AIAPI.result(thread_id, newrun.id)
+        AIAPI.New_Message(User_Message.content[5:], thread_id)  # Skip the "$ask " part
+        newrun = AIAPI.Create_Run(thread_id, Assistant_Model)
+        response = AIAPI.Grab_Result(thread_id, newrun.id)
 
         # Split the response into 2000-character chunks
         chunks = [response[i:i + 1900] for i in range(0, len(response), 1900)]
 
         # Send each chunk in a separate message
         for chunk in chunks:
-            await message.channel.send(chunk, reference=message)
+            await User_Message.channel.send(chunk, reference=User_Message)
             await asyncio.sleep(1)  # Optional: slight delay between messages
 
     except Exception as e:
-        await message.channel.send(f"An error occurred: {e}")
+        await User_Message.channel.send(f"An error occurred: {e}")

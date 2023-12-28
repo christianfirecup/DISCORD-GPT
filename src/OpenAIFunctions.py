@@ -4,47 +4,39 @@ import os
 
 load_dotenv()
 client = OpenAI(api_key=os.getenv('OPENAI'))
-
-
-def CreateAssistant(names, instructions1, tools1, model1):
+def Create_Assistant(name, instructions, tools, model):
     return client.beta.assistants.create(
-        name=names,
-        instructions=instructions1,
-        tools=tools1,
-        model=model1
+        name=name,
+        instructions=instructions,
+        tools=tools,
+        model=model
 
     )
-
-
-def CreateThread():
+def Create_Thread():
     return client.beta.threads.create()
 
 
-def NewMessage(usermessage, threadid):
+def New_Message(usermessage, threadID):
     return client.beta.threads.messages.create(
-        thread_id=threadid,
+        thread_id=threadID,
         role="user",
         content=usermessage
 
     )
-
-
-def CreateRun(threadID, AssistantID):
+def Create_Run(threadID, AssistantID):
     return client.beta.threads.runs.create(
         thread_id=threadID,
         assistant_id=AssistantID,
 
     )
-
-
-def result(threadID, runId, ):
+def Grab_Result(threadID, runID):
     received = False
     while not received:
 
         # Retrieve the latest run status
         results = client.beta.threads.runs.retrieve(
             thread_id=threadID,
-            run_id=runId
+            run_id=runID
         )
 
         # Check if the run is completed
@@ -59,7 +51,7 @@ def result(threadID, runId, ):
 
 
 if __name__ == "__main__":
-    newthread = CreateThread()
-    NewMessage("What is your objective", newthread.id)
-    newrun = CreateRun(newthread.id, "asst_Mv3MzfjZUw4pIUT8jvgWwbMP")
-    print(result(newthread.id, newrun.id))
+    newthread = Create_Thread()
+    New_Message("What is your objective", newthread.id)
+    newrun = Create_Run(newthread.id, "asst_Mv3MzfjZUw4pIUT8jvgWwbMP")
+    print(Grab_Result(newthread.id, newrun.id))

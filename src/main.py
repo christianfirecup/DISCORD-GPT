@@ -1,37 +1,31 @@
-
+import discord
 import BotFunctions
 from dotenv import load_dotenv
 import os
 
-
 load_dotenv()
-
-import discord
-Assistant_Model = os.getenv('Assistant')
+Assistant_Model = os.getenv('Assistant_OpenAi')
 user_threads = {}
 intents = discord.Intents.default()
 intents.message_content = True
-Disclient = discord.Client(intents=intents)
+Discord_Client = discord.Client(intents=intents)
 
-
-@Disclient.event
+@Discord_Client.event
 async def on_ready():
-    print(f'We have logged in as {Disclient.user}')
+    print(f'We have logged in as {Discord_Client.user}')
 
-
-@Disclient.event
-async def on_message(message):
-    if message.author == Disclient.user:
+@Discord_Client.event
+async def on_message(User_Message):
+    if User_Message.author == Discord_Client.user:
         return
 
-    if BotFunctions.MessageContent(message,'$hello'):
-        await BotFunctions.sendmessge(message, "Hello!")
+    if BotFunctions.On_Message_Captured(User_Message, '$hello'):
+        await BotFunctions.Bot_Check_Message(User_Message, "Hello!")
 
-    if BotFunctions.MessageContent(message,'$ask'):
-        await BotFunctions.AIBotSender(message, user_threads, Assistant_Model)
+    if BotFunctions.On_Message_Captured(User_Message, '$ask'):
+        await BotFunctions.Bot_Send_Message(User_Message, user_threads, Assistant_Model)
 
-    if BotFunctions.MessageContent(message, "$createdir"):
-        await BotFunctions.BotCreateAssistant("test", None, None, None, message)
+    if BotFunctions.On_Message_Captured(User_Message, "$createdir"):
+        await BotFunctions.Bot_Create_Assistant("test", None, None, None, User_Message)
 
-
-Disclient.run(os.getenv('TOKEN'))
+Discord_Client.run(os.getenv('DISCORD_TOKEN'))
