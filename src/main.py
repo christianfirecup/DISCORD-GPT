@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-Assistant_Model = os.getenv('Assistant_OpenAi')
+Assistant_Model = os.getenv('Assistant_OpenAI')
 user_threads = {}
 intents = discord.Intents.default()
 intents.message_content = True
@@ -20,12 +20,12 @@ async def on_message(User_Message):
         return
 
     if BotFunctions.On_Message_Captured(User_Message, '$hello'):
-        await BotFunctions.Bot_Check_Message(User_Message, "Hello!")
+        await BotFunctions.Bot_Responder_Message(User_Message, "Hello!")
 
     if BotFunctions.On_Message_Captured(User_Message, '$ask'):
-        await BotFunctions.Bot_Send_Message(User_Message, user_threads, Assistant_Model)
+        await BotFunctions.Bot_AI_Sender(User_Message, user_threads, Assistant_Model)
 
     if BotFunctions.On_Message_Captured(User_Message, "$createdir"):
-        await BotFunctions.Bot_Create_Assistant("test", None, None, None, User_Message)
+        await BotFunctions.Bot_Create_UserDIR(User_Message)
 
 Discord_Client.run(os.getenv('DISCORD_TOKEN'))

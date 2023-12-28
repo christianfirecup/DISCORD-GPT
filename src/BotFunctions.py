@@ -6,15 +6,17 @@ import os
 def On_Message_Captured(User_Message, Check):
     return User_Message.content.startswith(Check)
 
-async def Bot_Check_Message(User_Message, response):
-    return User_Message.channel.send(response)
+async def Bot_Responder_Message(User_Message, response):
+    return await User_Message.channel.send(response)
 
-async def Bot_Create_Assistant(name, instructions, tools, model, User_Message):
-    await User_Message.channel.send('Creating Dir')
-    user_id = User_Message.author.id
-    os.mkdir(str(user_id))
+async def Bot_Create_UserDIR(User_Message):
+        await Bot_Responder_Message(User_Message,'Creating Dir')
+        user_id = User_Message.author.id
+        if not os.path.exists(str(user_id)):
+            os.mkdir(str(user_id))
+        await Bot_Responder_Message(User_Message,'To name Your Bot Please Run $nme YOUR BOT NAME HERE. To Stop Creating Your Bot Please type Anything Else')
 
-async def Bot_Send_Message(User_Message, user_threads, Assistant_Model):
+async def Bot_AI_Sender(User_Message, user_threads, Assistant_Model):
     user_id = User_Message.author.id
 
     if user_id not in user_threads:
