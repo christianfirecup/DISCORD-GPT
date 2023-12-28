@@ -3,9 +3,17 @@ import OpenaiFunctions as AIAPI
 import os
 
 
+def MessageContent(message, Check):
+    return message.content.startswith(Check)
+
+async def sendmessge(message, response):
+    return message.channel.send(response)
+
 async def BotCreateAssistant(names, instructions1, tools1, model1, message):
+    await message.channel.send('Creating Dir')
     user_id = message.author.id
-    os.mkdir("/"+user_id)
+    os.mkdir(str(user_id))
+
 
 async def AIBotSender(message, user_threads, Assistant_Model):
     user_id = message.author.id

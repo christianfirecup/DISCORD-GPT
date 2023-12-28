@@ -24,11 +24,14 @@ async def on_message(message):
     if message.author == Disclient.user:
         return
 
-    if message.content.startswith('$hello'):
-        await message.channel.send('Hello!')
+    if BotFunctions.MessageContent(message,'$hello'):
+        await BotFunctions.sendmessge(message, "Hello!")
 
-    if message.content.startswith('$ask'):
+    if BotFunctions.MessageContent(message,'$ask'):
         await BotFunctions.AIBotSender(message, user_threads, Assistant_Model)
+
+    if BotFunctions.MessageContent(message, "$createdir"):
+        await BotFunctions.BotCreateAssistant("test", None, None, None, message)
 
 
 Disclient.run(os.getenv('TOKEN'))
