@@ -16,16 +16,15 @@ async def Bot_Create_Assistant(name, instructions, tools, model, User_Message):
 
 async def Bot_Send_Message(User_Message, user_threads, Assistant_Model):
     user_id = User_Message.author.id
-    print(user_id)
 
     if user_id not in user_threads:
-        newthread = AIAPI.Create_Thread()
-        user_threads[user_id] = newthread.id
+        New_Thread = AIAPI.Create_Thread()
+        user_threads[user_id] = New_Thread.id
     try:
         thread_id = user_threads[user_id]
         AIAPI.New_Message(User_Message.content[5:], thread_id)  # Skip the "$ask " part
-        newrun = AIAPI.Create_Run(thread_id, Assistant_Model)
-        response = AIAPI.Grab_Result(thread_id, newrun.id)
+        New_Run = AIAPI.Create_Run(thread_id, Assistant_Model)
+        response = AIAPI.Grab_Result(thread_id, New_Run.id)
 
         # Split the response into 2000-character chunks
         chunks = [response[i:i + 1900] for i in range(0, len(response), 1900)]
