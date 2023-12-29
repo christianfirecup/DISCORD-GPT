@@ -1,5 +1,5 @@
 import discord
-import BotFunctions
+import BotFunctions as GPTBot
 from dotenv import load_dotenv
 import os
 
@@ -19,13 +19,15 @@ async def on_message(User_Message):
     if User_Message.author == Discord_Client.user:
         return
 
-    if BotFunctions.On_Message_Captured(User_Message, '$hello'):
-        await BotFunctions.Bot_Responder_Message(User_Message, "Hello!")
+    if GPTBot.On_Message_Captured(User_Message, '$hello'):
+        await GPTBot.Responder_Message(User_Message, "Hello!")
 
-    if BotFunctions.On_Message_Captured(User_Message, '$ask'):
-        await BotFunctions.Bot_AI_Sender(User_Message, user_threads, Assistant_Model)
+    if GPTBot.On_Message_Captured(User_Message, '$ask'):
+        await GPTBot.AI_Sender(User_Message, user_threads, Assistant_Model)
 
-    if BotFunctions.On_Message_Captured(User_Message, "$createdir"):
-        await BotFunctions.Bot_Create_UserDIR(User_Message)
+    if GPTBot.On_Message_Captured(User_Message, "$createdir"):
+        await GPTBot.Create_UserDIR(User_Message)
+    if GPTBot.On_Message_Captured(User_Message, "$nme"):
+        await GPTBot.Responder_Message(User_Message, "Name Saved")
 
-Discord_Client.run(os.getenv('DISCORD_TOKEN'))
+GPTBot.Run(os.getenv('DISCORD_TOKEN'), Discord_Client)
