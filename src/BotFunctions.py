@@ -6,20 +6,20 @@ import os
 def On_Message_Captured(User_Message, Check):
     return User_Message.content.startswith(Check)
 
-async def Responder_Message(User_Message, response):
+async def Generic_Message(User_Message, response):
     return await User_Message.channel.send(response)
 
 async def Create_UserDIR(User_Message):
-        await Responder_Message(User_Message, 'Creating Dir')
+        await Generic_Message(User_Message, 'Creating Dir')
         user_id = User_Message.author.id
         if not os.path.exists(str(user_id)):
             os.mkdir(str(user_id))
-        await Responder_Message(User_Message, 'To name Your Bot Please Run $nme YOUR BOT NAME HERE. To Stop Creating Your Bot Please type Anything Else')
+        await Generic_Message(User_Message, 'To name Your Bot Please Run $nme YOUR BOT NAME HERE. To Stop Creating Your Bot Please type Anything Else')
 
 def Run(Discord_Token, Discord_Client):
     Discord_Client.run(Discord_Token)
 
-async def AI_Sender(User_Message, user_threads, Assistant_Model):
+async def AI_Message(User_Message, user_threads, Assistant_Model):
     user_id = User_Message.author.id
 
     if user_id not in user_threads:

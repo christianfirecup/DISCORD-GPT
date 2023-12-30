@@ -50,8 +50,3 @@ def Grab_Result(threadID, runID):
                 return f"GPTBOT: {content}"
 
 
-if __name__ == "__main__":
-    newthread = Create_Thread()
-    New_Message("What is your objective", newthread.id)
-    newrun = Create_Run(newthread.id, "asst_Mv3MzfjZUw4pIUT8jvgWwbMP")
-    print(Grab_Result(newthread.id, newrun.id))
