@@ -38,8 +38,9 @@ To set up the Discord GPT Bot, follow these steps:
 3. Create a `.env` file in the root directory of the project and add your Discord Bot Token and OpenAI API key:
 
    ```
-   DISCORD_TOKEN=your_discord_bot_token
-   Assistant_OpenAI=your_openai_api_key
+   DISCORD_TOKEN=DISCORD-BOT-TOKEN
+   OPENAI=OPENAI-KEY
+   Assistant_OpenAI=Defualt-Assistant
    ```
 
 ### Usage
@@ -68,4 +69,4 @@ Contributions to this project are welcome. Please fork the repository and submit
 
 ## License
 
-[Specify the license under which the project is made available]
+[MIT]
