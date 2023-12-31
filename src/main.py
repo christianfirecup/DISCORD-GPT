@@ -10,12 +10,22 @@ Assistant_Model = os.getenv('Assistant_OpenAI')
 user_threads = {}
 intents = discord.Intents.default()
 intents.message_content = True
+intents.guilds = True
 Discord_Token = os.getenv('DISCORD_TOKEN')
 Discord_Client = discord.Client(intents=intents)
+
+
 
 @Discord_Client.event
 async def on_ready():
     print(f'We have logged in as {Discord_Client.user}')
+    for guild in Discord_Client.guilds:
+        directory_path = os.path.join('src', 'guilds', str(guild.id))
+        if not os.path.exists(directory_path):  # Check if the directory does NOT exist
+            os.makedirs(directory_path)  # Use os.makedirs to create the directory if it doesn't exist
+            print(f"Folder created for guild {guild.id}")
+
+
 
 @Discord_Client.event
 async def on_message(User_Message):
@@ -44,6 +54,7 @@ async def on_message(User_Message):
         if new_model is not None:
             Assistant_Model = new_model.id
             await GPTBot.Generic_Message(User_Message, f"Model updated to {Assistant_Model}")
+
 
 # Run command
 if __name__ == '__main__':
