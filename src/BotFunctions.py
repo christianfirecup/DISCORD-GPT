@@ -79,10 +79,6 @@ async def Load_Model(User_Message):
             await Generic_Message(User_Message, "COULD NOT LOAD SAVE DATA PLEASE CREATE IT IF YOU HAVENT")
             return None
 
-
-
-
-
 async def AI_Message(User_Message, user_threads, Assistant_Model):
     user_id = User_Message.author.id
 
