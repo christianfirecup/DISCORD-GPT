@@ -4,6 +4,8 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
+
+# No need for 'global' here as we're in the global scope already
 Assistant_Model = os.getenv('Assistant_OpenAI')
 user_threads = {}
 intents = discord.Intents.default()
@@ -16,8 +18,10 @@ async def on_ready():
     print(f'We have logged in as {Discord_Client.user}')
 
 @Discord_Client.event
-#Discord message capture events
 async def on_message(User_Message):
+    # Since we're inside a function, we declare Assistant_Model as global if we plan to modify it
+    global Assistant_Model
+
     if User_Message.author == Discord_Client.user:
         return
 
@@ -29,8 +33,18 @@ async def on_message(User_Message):
 
     if GPTBot.On_Message_Captured(User_Message, "$createdir"):
         await GPTBot.Create_UserDIR(User_Message)
+    if GPTBot.On_Message_Captured(User_Message, "$CreateSave"):
+        await GPTBot.Create_Dictonary(User_Message)
     if GPTBot.On_Message_Captured(User_Message, "$nme"):
-        await GPTBot.Generic_Message(User_Message, "Name Saved")
-#run command
+        await GPTBot.Assign_User_Bot_Name(User_Message)
+    if GPTBot.On_Message_Captured(User_Message, "$instruct"):
+        await GPTBot.Assign_User_Bot_Instructions(User_Message)
+    if GPTBot.On_Message_Captured(User_Message, "$LoadGPT"):
+        new_model = await GPTBot.Load_Model(User_Message)
+        if new_model is not None:
+            Assistant_Model = new_model.id
+            await GPTBot.Generic_Message(User_Message, f"Model updated to {Assistant_Model}")
+
+# Run command
 if __name__ == '__main__':
     GPTBot.Run(Discord_Token, Discord_Client)
