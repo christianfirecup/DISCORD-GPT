@@ -25,8 +25,9 @@ async def Create_Dictonary(User_Message):
     user_id = User_Message.author.id
     user_data = {
         "user_id": user_id,
-        "bot_name": "None",
-        "instructions": "None"
+        "bot_name": None,
+        "instructions": None,
+        "Assistants": []
     }
     directory_path = os.path.join('src', str(user_id))  # The directory path within 'src'
     if os.path.exists(directory_path) and not os.listdir(directory_path):
